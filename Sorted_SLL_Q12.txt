@@ -1,0 +1,226 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.12
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.12 :Write a program to insert a value in a sorted linked list. 
+............................................................................................................................................
+............................................................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node     //structure to create the Node
+{
+    int info;
+    struct node *link;
+};
+
+struct node *start = NULL;      //creating the 'start' node such that its scope remains global
+void createList()       //before performing operations on the nodes first we will create a list of n nodes given by user.
+{
+    if (start == NULL)
+    {
+        int n, i, data;
+        printf("Enter the no. of nodes you want to create\n");
+        scanf("%d", &n);
+        if (n != 0)
+        {
+            struct node *newnode, *temp;
+            newnode = (struct node *)malloc(sizeof(struct node));       //allocates memory to newnode
+            start = newnode;
+            temp = start;
+            printf("Please enter data in ascending order\n");
+            printf("Enter the data in node 1\n");
+            scanf("%d", &data);
+            start->info = data;
+            for (i = 2; i <= n; i++)
+            {
+                newnode = (struct node *)malloc(sizeof(struct node));
+                temp->link = newnode;
+                printf("Enter the data in the node %d\n", i);
+                scanf("%d", &data);
+                if (data > start->info)
+                    newnode->info = data;
+                temp = temp->link;
+            }
+            temp->link = NULL;
+        }
+        printf("The list is created\n");
+    }
+    else
+    {
+        printf("The node is already created\n");
+    }
+}
+
+//  it will used to go through entire elements of the list one after another.
+void traverse()
+{
+    struct node *temp;
+    int i = 1;
+    if (start == NULL)
+        printf("The list is empty\n");
+    else
+    {
+        temp = start;
+        while (temp != NULL)
+        {
+            printf("Node %d: %d\n", i, temp->info);
+            i++;
+            temp = temp->link;
+        }
+    }
+}
+
+//it will take input from user as new node data and will automatically insert it into linkedlist in sorted order.
+struct node soretdInsert()
+{
+    struct node *temp;
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    int data;
+    printf("Please enter data in th node:\n");
+    scanf("%d", &data);
+    newnode->info = data;
+    newnode->link = NULL;
+    if (start == NULL || data < start->info)
+    {
+        newnode->link = start;
+        start = newnode;
+    }
+    else
+    {
+        temp = start;
+        while (temp->link != NULL && temp->link->info < data)
+        {
+            temp = temp->link;
+        }
+            newnode->link = temp->link;
+            temp->link = newnode;
+    }
+}
+
+int main()
+{
+    //creates the list by takking no. of nodes as input from user.
+    createList();
+    int choice;
+    while (1)
+    {
+        printf("\nChoose any of following\n");
+        printf("\n\t1 To see list\n");
+        printf("\n\t2 To insert in sorted list\n");
+        printf("\n\t3 To exit\n");
+        printf("\nEnter your choice\n");
+        scanf("%d", &choice);
+
+        //using the switch case to call the function according to user input.
+        switch (choice)
+        {
+        case 1:
+            traverse();
+            break;
+        case 2:
+            soretdInsert();
+            break;
+        case 3:
+            exit(1);
+        default:
+            printf("Please enter valid choice\n");
+            break;
+        }
+    }
+    return 0;
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+Enter the no. of nodes you want to create
+3
+Please enter data in ascending order
+Enter the data in node 1
+5
+Enter the data in the node 2
+10
+Enter the data in the node 3
+15
+The list is created
+
+Choose any of following
+
+        1 To see list
+
+        2 To insert in sorted list
+
+        3 To exit
+
+Enter your choice
+2
+Please enter data in th node:
+8
+
+Choose any of following
+
+        1 To see list
+
+        2 To insert in sorted list
+
+        3 To exit
+
+Enter your choice
+1
+Node 1: 5
+Node 2: 8
+Node 3: 10
+Node 4: 15
+
+Choose any of following
+
+        1 To see list
+
+        2 To insert in sorted list
+
+        3 To exit
+
+Enter your choice
+2
+Please enter data in th node:
+17
+
+Choose any of following
+
+        1 To see list
+
+        2 To insert in sorted list
+
+        3 To exit
+
+Enter your choice
+1
+Node 1: 5
+Node 2: 8
+Node 3: 10
+Node 4: 15
+Node 5: 17
+
+Choose any of following
+
+        1 To see list
+
+        2 To insert in sorted list
+
+        3 To exit
+
+Enter your choice
+3

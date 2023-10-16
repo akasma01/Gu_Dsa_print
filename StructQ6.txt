@@ -1,0 +1,43 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.6
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.6:Write a program to calculate the distance between
+the given points (6,3) and (2,2).
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>   //using math library to use sqrt() function to calculate square root.
+
+struct dist     //creating structure to values of x and y axis.
+{
+    int x, y;
+};
+
+void main()
+{
+    struct dist p1 = {6, 3};    //creating point p1 of type struct dist and assigning values to its x-axis and y-axis.
+    struct dist p2 = {2, 2};    //creating point p2 of type struct dist and assigning values to its x-axis and y-axis.
+    float distance;
+    distance = sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2)); //calculating distance between 2 points and storing it in distance variable. 
+    printf("The distance between 2 points is : %f", distance);
+
+    getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+The distance between 2 points is : 4.123106

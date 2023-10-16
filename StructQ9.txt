@@ -1,0 +1,73 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.9
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.9:Write a program to add and subtract 10hrs 20mins
+50sec and 5hrs 30min 40sec.
+............................................................................................................................................
+............................................................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+
+struct time // creating a structure time with 3 data members hour,min and sec.
+{
+    int hour, min, sec;
+};
+
+void main()
+{
+    // Declaring 2 objects of the structure time and assigning values to its data-members.
+    struct time t1 = {10, 10, 10}, t2 = {5, 30, 40}, add, sub;
+    add.sec = t1.sec + t2.sec;                     // adding seconds of both objects.
+    add.min = t1.min + t2.min + (add.sec) / 60;    // adding minutes of both objects and extracting extra minutes from sum of seconds.
+    add.hour = t1.hour + t2.hour + (add.min) / 60; // adding hours of both objects and extracting extra hours from sum of minutes.
+    add.min = (add.min) % 60;                      // calculating minutes after removing extra hours.
+    add.sec = (add.sec) % 60;                      // calculating seconds after removing extra minutes.
+
+    printf("The addition of time is %d : %d : %d\n", add.hour, add.min, add.sec); // printing addition of times.
+
+    // subtracting times
+
+    // adding another 60 second to t1 if difference of seconds is negative and reducing minute by 1.
+    while (t2.sec > t1.sec)
+    {
+        t1.min -= 1;
+        t1.sec += 60;
+    }
+    sub.sec = t1.sec - t2.sec; //subtracting  seconds.
+
+    // adding another 60 minutes to t1 if difference minutes is negative and reducing hour by 1.
+    while (t2.min > t1.min)
+    {
+        t1.hour -= 1;
+        t1.min += 60;
+    }
+    sub.min = t1.min - t2.min;      //subtracting seconds.
+    sub.hour = t1.hour - t2.hour;       //subtracting hours.
+
+    // printing difference of time.
+
+    printf("The substraction of time is %d : %d : %d\n", sub.hour, sub.min, sub.sec);
+
+    getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+The addition of time is 15 : 40 : 50
+The substraction of time is 4 : 39 : 30

@@ -1,0 +1,59 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.5
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.5. :Write a program to find smallest of three numbers
+using structures..................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+
+struct max      //creating a structure which have 3 data members.
+{
+    int a, b, c;
+};
+
+void main()
+{
+    struct max m1 = {90, 47, 130};  //Declaring object of the structure and assigning values to its data-members.
+    if (m1.a > m1.b)        //comparing first 2 numbers to get greater no. between them
+    {   
+        //Now comparing greater no. between first 2 no. with the third No. to find greatest among 3 numbers.
+        if (m1.a > m1.c)
+            printf("%d is greatest\n", m1.a);
+        else
+            printf("%d is greatest\n", m1.c);
+    }
+    else if (m1.a < m1.b)      //comparing first 2 numbers to get greater no. between them
+    {
+        //Now comparing greater no. between first 2 no. with the third No. to find greatest among 3 numbers.
+        if (m1.b > m1.c)
+            printf("%d is greatest\n", m1.b);
+        else
+            printf("%d is greatest\n", m1.c);
+    }
+    else
+    {
+        printf("Values are not unique\n");
+    }
+
+    getch();
+}
+
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+130 is greatest

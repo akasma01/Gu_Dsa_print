@@ -1,0 +1,195 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.7
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.7 :Write a program to read and display the information
+about all the employees in a department. Edit the
+details of the ith employee and redisplay the
+information.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+struct dob
+{
+    int day, month, year;
+};
+
+struct Employee     // Nested structre of Employee contains object of structure dob.
+{
+    int emp_id;
+    char name[30], gender[10];
+    float Salary;
+    struct dob d;
+};
+
+void main()
+{
+    struct Employee emp[3];     // create the array object of structure student.
+    int i = 0, j = 0, index;
+    for (i = 0; i < 3; i++)     // taking 3 records as input from user.
+    {
+        printf("Enter details of the Employee %d:-\n", i + 1);
+        printf("Enter Employee id of the Employee\n");
+        scanf("%d", &emp[i].emp_id);
+        printf("Enter Name of the Employee\n");
+        scanf("%s", &emp[i].name);
+        printf("Enter Gender of the Employee\n");
+        scanf("%s", &emp[i].gender);
+        printf("Please enter birth details of the student %d:-\n", i + 1);
+        printf("Enter Day\n");
+        scanf("%d", &emp[i].d.day);
+        printf("Enter Month\n");
+        scanf("%d", &emp[i].d.month);
+        printf("Enter Year\n");
+        scanf("%d", &emp[i].d.year);
+        printf("Enter Salary of Employee\n");
+        scanf("%f", &emp[i].Salary);
+    }
+
+    //// Displaying formated output as a list using format specifier.
+
+    printf("Employee Id\tName  Gender\t   DOB\t           Salary\n");
+    for (i = 0; i < 3; i++)
+    {
+        printf("%5d%14s%7s%9d-%d-%d%20f\n", emp[i].emp_id, emp[i].name, emp[i].gender, emp[i].d.day, emp[i].d.month, emp[i].d.year, emp[i].Salary);
+    }
+
+    //taking the ith no. from user to edit the employee details of that number from our records.
+    printf("Enter the row no. of employee which you want to edit\n");
+    scanf("%d", &index);
+    for (i = 0; i < 3; i++)     //using for loop to find the ith record from array of struct object.
+    {
+        if (i == index - 1) 
+        {   
+            //Editing the details of the user.
+            printf("Please Edit details of employee at postion %d\n", index);
+            printf("Enter Employee id of the Employee\n");
+            scanf("%d", &emp[i].emp_id);
+            printf("Enter Name of the Employee\n");
+            scanf("%s", &emp[i].name);
+            printf("Enter Gender of the Employee\n");
+            scanf("%s", &emp[i].gender);
+            printf("Please enter birth details of the student %d:-\n", i + 1);
+            printf("Enter Day\n");
+            scanf("%d", &emp[i].d.day);
+            printf("Enter Month\n");
+            scanf("%d", &emp[i].d.month);
+            printf("Enter Year\n");
+            scanf("%d", &emp[i].d.year);
+            printf("Enter Salary of Employee\n");
+            scanf("%f", &emp[i].Salary);
+            j = 1;
+        }
+    }
+
+    if (j == 1)
+    {
+        //displaying the updated list to user
+        printf("Employee at position %d found and edited successfully\n", index);
+        printf("Employee Id\tName  Gender\t   DOB\t           Salary\n");
+        for (i = 0; i < 3; i++)
+        {
+            printf("%5d%14s%7s%9d-%d-%d%20f\n", emp[i].emp_id, emp[i].name, emp[i].gender, emp[i].d.day, emp[i].d.month, emp[i].d.year, emp[i].Salary);
+        }
+    }
+    else
+    {
+        //displaying output message if ith location not found.
+        printf("Sorry no employee found at %d position.\n", index);
+    }
+
+    getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+Enter details of the Employee 1:-
+Enter Employee id of the Employee
+1
+Enter Name of the Employee
+a
+Enter Gender of the Employee
+m
+Please enter birth details of the student 1:-
+Enter Day
+18
+Enter Month
+05
+Enter Year
+2001
+Enter Salary of Employee
+50000
+Enter details of the Employee 2:-
+Enter Employee id of the Employee
+2
+Enter Name of the Employee
+m
+Enter Gender of the Employee
+m
+Please enter birth details of the student 2:-
+Enter Day
+27
+Enter Month
+07
+Enter Year
+2002
+Enter Salary of Employee
+95203
+Enter details of the Employee 3:-
+Enter Employee id of the Employee
+3
+Enter Name of the Employee
+a
+Enter Gender of the Employee
+f
+Please enter birth details of the student 3:-
+Enter Day
+06
+Enter Month
+03
+Enter Year
+1996
+Enter Salary of Employee
+89000
+Employee Id     Name  Gender       DOB             Salary
+    1             a      m       18-5-2001        50000.000000
+    2             m      m       27-7-2002        95203.000000
+    3             a      f        6-3-1996        89000.000000
+Enter the row no. of employee which you want to edit
+2
+Please Edit details of employee at postion 2
+Enter Employee id of the Employee
+2
+Enter Name of the Employee
+s
+Enter Gender of the Employee
+m
+Please enter birth details of the student 2:-
+Enter Day
+17
+Enter Month
+09
+Enter Year
+2001
+Enter Salary of Employee
+66000
+Employee at position 2 found and edited successfully
+Employee Id     Name  Gender       DOB             Salary
+    1             a      m       18-5-2001        50000.000000
+    2             s      m       17-9-2001        66000.000000
+    3             a      f        6-3-1996        89000.000000

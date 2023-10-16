@@ -1,0 +1,1043 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.11
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.11 :create a linked-list and write a menu-driven program to perform following operations on it.
+1).Insertion at begining.
+2).Insertion at end.
+3).Count No. of nodes in Linked-list.
+4).count No. of Even/Odd nodes in linked-list.
+5).print every alternate node in Linked-list.
+6).Insert before a given node.
+7).Insert after a given node.
+8).Deletion at begining.
+9).Deletion at end.
+10).Delete a node with a given value.
+............................................................................................................................................
+............................................................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node     //structure to create the Node
+{
+    int info;
+    struct node *link;
+};
+
+struct node *start = NULL;  //creating the 'start' node such that its scope remains global
+
+void createList()           //before performing operations on the nodes first we will create a list of n nodes given by user.
+{
+    if (start == NULL)
+    {
+        int n, i;
+        printf("enter the number of nodes");
+        scanf("%d", &n);
+        if (n != 0)
+        {
+            int data;
+            struct node *newnode;
+            struct node *temp;
+            newnode = (struct node *)malloc(sizeof(struct node));   //allocates memory to newnode
+            start = newnode;
+            temp = start;
+            printf("\nenter the number to be inserted");
+            scanf("%d", &data);
+            start->info = data;
+            for (i = 2; i <= n; i++)
+            {
+                newnode = (struct node *)malloc(sizeof(struct node));
+                temp->link = newnode;
+                printf("Enter the number to be inserted");
+                scanf("%d", &data);
+                newnode->info = data;
+                temp = temp->link;
+            }
+            temp->link = NULL;
+        }
+        printf("\nThe list is created");
+    }
+    else
+    {
+        printf("\nThe list is already created");
+    }
+}
+
+//  it will used to go through entire elements of the list one after another.
+
+void traverse()
+{
+    struct node *temp;
+
+    if (start == NULL)
+        printf("\nThe list is empty");
+    else
+    {
+        temp = start;
+
+        while (temp != NULL)
+        {
+            printf("Data = %d\n", temp->info);
+            temp = temp->link;
+        }
+    }
+}
+
+//To insert a new element at the begining of the list.
+void insetAtFront()
+{
+    int data;
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the number to be inserted");
+    scanf("%d", &data);
+    temp->info = data;
+
+    temp->link = start;
+    start = temp;
+}
+
+//To insert a new element at the ending of the list.
+void insertAtEnd()
+{
+    int data;
+    struct node *temp, *head;
+    temp = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the number to be inserted");
+    scanf("%d", &data);
+    temp->link = NULL;
+    temp->info = data;
+    head = start;
+    while (head->link != NULL)
+    {
+        head = head->link;
+    }
+
+    head->link = temp;
+}
+
+// To count the no. of nodes in the list.  
+void countNode()
+{
+    struct node *temp;
+    int count = 0;
+    temp = start;
+    while (temp != NULL)
+    {
+        temp = temp->link;
+        count++;
+    }
+    printf("There are %d Nodes in Linkedlist", count);
+}
+
+// To count no. of odd and even number of nodes in the list.
+void countOddEven()
+{
+    struct node *temp;
+    int oddcount = 0, count = 0;
+    int evencount = 0;
+    temp = start;
+
+    while (temp != NULL)
+    {
+
+        if ((temp->info) % 2 == 0)
+        {
+            evencount++;
+        }
+        else
+        {
+            oddcount++;
+        }
+        temp = temp->link;
+        count++;
+    }
+    printf("There are %d Nodes in Linkedlist\n", count);
+
+    printf("There are %d Even Nodes in Linkedlist\n", evencount);
+    printf("There are %d odd Nodes in Linkedlist\n", oddcount);
+}
+
+
+// To print every alternate node in the list.
+void alternateNode()
+{
+    struct node *temp;
+    int count = 2;
+    temp = start;
+    if (temp == NULL)
+        printf("The list is empty\n");
+    else
+    {
+        printf("Alternate nodes are:\n");
+        while (temp != NULL)
+        {
+            if (count % 2 == 0)
+            {
+                printf("%d\n", temp->info);
+            }
+            count++;
+            temp = temp->link;
+        }
+    }
+}
+
+// to insert a node before a given node.
+void insertBeforeNode()
+{
+    struct node *temp, *preptr, *newnode;
+    int data, target;
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data in newnode\n");
+    scanf("%d", &data);
+    printf("Enter the node to search\n");
+    scanf("%d", &target);
+    newnode->info = data;
+    newnode->link = NULL;
+    temp = start;
+    if (temp == NULL)
+        printf("The list is empty");
+    else
+    {
+        while (temp != NULL && temp->info != target)
+        {
+            preptr = temp;
+            temp = temp->link;
+        }
+
+        if (temp == start)
+        {
+            newnode->link = temp;
+            start = newnode;
+        }
+        else if (temp != NULL)
+        {
+            preptr->link = newnode;
+            newnode->link = temp;
+        }
+        else
+            printf("Node not found");
+    }
+}
+
+// to insert a node After a given node.
+void insertAfterNode()
+{
+    struct node *temp, *newnode;
+    int data, target;
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data you want to enter in node");
+    scanf("%d", &data);
+    newnode->info = data;
+    newnode->link = NULL;
+    printf("Enter the node you want to search for");
+    scanf("%d", &target);
+    temp = start;
+    if (temp == NULL)
+        printf("The list is empty");
+    else
+    {
+        while (temp != NULL && temp->info != target)
+        {
+            temp = temp->link;
+        }
+        if (temp == NULL)
+        {
+            printf("Sorry No node found");
+        }
+        else
+        {
+            newnode->link = temp->link;
+            temp->link = newnode;
+        }
+    }
+}
+
+
+//To delete the node at the begining of the list. 
+void deleteFirst()
+{
+    struct node *temp;
+    if (start == NULL)
+        printf("\nThe list is empty\n");
+    else
+    {
+        temp = start;
+        start = start->link;
+        free(temp);
+    }
+}
+
+//To delete the node at the ending of the list.
+void deleteEnd()
+{
+    struct node *temp, *prevnode;
+    if (start == NULL)
+        printf("\nThe list is empty");
+    else
+    {
+        temp = start;
+        while (temp->link != NULL)
+        {
+            prevnode = temp;
+            temp = temp->link;
+        }
+        free(temp);
+        prevnode->link = NULL;
+    }
+}
+
+//To delete the node based on the value of the node..
+void deleteOnValue()
+{
+    struct node *temp, *preptr;
+    int target;
+    printf("Enter the node data you want to delete\n");
+    scanf("%d", &target);
+    temp = start;
+    if (temp == NULL)
+        printf("The list is empty\n");
+    else
+    {
+        while (temp != NULL && temp->info != target)
+        {
+            preptr = temp;
+            temp = temp->link;
+        }
+    }
+
+    if (temp == NULL)
+        printf("Sorry,No Node found...");
+    else if (temp == start)
+    {
+        start = start->link;
+        free(temp);
+    }
+    else if (temp->link == NULL)
+    {
+        preptr->link = NULL;
+        free(temp);
+    }
+    else
+    {
+        preptr->link = temp->link;
+        free(temp);
+    }
+}
+
+int main()
+{
+    //creates the list by takking no. of nodes as input from user.
+    createList();
+    int choice;
+    while (1)
+    {
+        printf("\n\t1 To see list\n");
+        printf("\n\t2 For insertion of node at"
+               " starting\n");
+        printf("\n\t3 For insertion of node  at"
+               " ending\n");
+        printf("\n\t4 to count no. of nodes in the list\n");
+        printf("\n\t5 to count no. of odd/even nodes in the list.\n");
+        printf("\n\t6 to print every alternate nodes in the list.\n");
+        printf("\n\t7 To Insert a node before the given node\n");
+        printf("\n\t8 To Insert a node after the given node\n");
+        printf("\n\t9 For delete a node at begining of the list\n");
+        printf("\n\t10 For delete a node at ending of the list\n");
+        printf("\n\t11 To Delete Based on value\n");
+        printf("\n\t12 To exit\n");
+        printf("\nEnter Choice :\n");
+        scanf("%d", &choice);
+
+        //using the switch case to call the function according to user input.
+        switch (choice)
+        {
+        case 1:
+            traverse();
+            break;
+        case 2:
+            insetAtFront();
+            break;
+        case 3:
+            insertAtEnd();
+            break;
+        case 4:
+            countNode();
+            break;
+        case 5:
+            countOddEven();
+            break;
+        case 6:
+            alternateNode();
+            break;
+        case 7:
+            insertBeforeNode();
+            break;
+        case 8:
+            insertAfterNode();
+            break;
+        case 9:
+            deleteFirst();
+            break;
+        case 10:
+            deleteEnd();
+            break;
+        case 11:
+            deleteOnValue();
+            break;
+        case 12:
+            exit(1);
+            break;
+        default:
+            printf("\nIncorrect choice");
+        }
+    }
+
+    return 0;
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+enter the number of nodes5
+
+enter the number to be inserted1
+Enter the number to be inserted2
+Enter the number to be inserted3
+Enter the number to be inserted4
+Enter the number to be inserted5
+
+The list is created
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 1
+Data = 2
+Data = 3
+Data = 4
+Data = 5
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+2
+Enter the number to be inserted20
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 20
+Data = 1
+Data = 2
+Data = 3
+Data = 4
+Data = 5
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+3
+Enter the number to be inserted21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 20
+Data = 1
+Data = 2
+Data = 3
+Data = 4
+Data = 5
+Data = 21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+4
+There are 7 Nodes in Linkedlist
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+5
+hello
+There are 7 Nodes in LinkedlistThere are 3 Even Nodes in Linkedlist
+There are 4 odd Nodes in Linkedlist
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+6
+Alternate nodes are:
+20
+2
+4
+21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 20
+Data = 1
+Data = 2
+Data = 3
+Data = 4
+Data = 5
+Data = 21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+7
+Enter the data in newnode
+33
+Enter the node to search
+4
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 20
+Data = 1
+Data = 2
+Data = 3
+Data = 33
+Data = 4
+Data = 5
+Data = 21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+8
+Enter the data you want to enter in node34
+Enter the node you want to search for4
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 20
+Data = 1
+Data = 2
+Data = 3
+Data = 33
+Data = 4
+Data = 34
+Data = 5
+Data = 21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+9
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 1
+Data = 2
+Data = 3
+Data = 33
+Data = 4
+Data = 34
+Data = 5
+Data = 21
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+10
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 1
+Data = 2
+Data = 3
+Data = 33
+Data = 4
+Data = 34
+Data = 5
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+11
+Enter the node data you want to delete
+34
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+1
+Data = 1
+Data = 2
+Data = 3
+Data = 33
+Data = 4
+Data = 5
+
+        1 To see list
+
+        2 For insertion of node at starting
+
+        3 For insertion of node  at ending
+
+        4 to count no. of nodes in the list
+
+        5 to count no. of odd/even nodes in the list.
+
+        6 to print every alternate nodes in the list.
+
+        7 To Insert a node before the given node
+
+        8 To Insert a node after the given node
+
+        9 For delete a node at begining of the list
+
+        10 For delete a node at ending of the list
+
+        11 To Delete Based on value
+
+        12 To exit
+
+Enter Choice :
+12

@@ -1,0 +1,127 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.1
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q .1 :Declare a structure that represents the following
+hierarchical information.
+(a) Student
+(b) Roll Number
+(c) Name
+(i) First name
+(ii) Middle Name
+(iii) Last Name
+(d) Sex
+(e) Date of Birth
+(i) Day
+(ii) Month
+(iii) Year
+(f) Marks
+(i) English
+(ii) Mathematics
+(iii) Computer Science
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+
+struct name
+{
+    char f_name[10], m_name[10], l_name[10];
+};
+
+struct dob
+{
+    int day, month, year;
+};
+
+struct marks
+{
+    int eng, math, science;
+};
+
+// Nested structre of student contains object of structure name,dob,marks.
+struct student
+{
+    int r_no;
+    struct name n;
+    char gender[10];
+    struct dob d;
+    struct marks m;
+};
+
+void main()
+{
+    struct student s1;     //create the object of structure
+    printf("Enter details of the student\n");
+    printf("Enter Roll No. of the student\n");
+    scanf("%d", &s1.r_no);
+    printf("Enter first name of the student\n");
+    scanf("%s", &s1.n.f_name);   //Accessing the data members of structure name through the object of stucture student...
+    printf("Enter middle name of the student\n");
+    scanf("%s", &s1.n.m_name);
+    printf("Enter last name of the student\n");
+    scanf("%s", &s1.n.l_name);
+    printf("Enter Gender of the student\n");
+    scanf("%s", &s1.gender);
+    printf("Please enter birth details of the student\n");
+    printf("Enter Day\n");
+    scanf("%d", &s1.d.day); //Accessing the data members of structure dob through the object of stucture student...
+    printf("Enter Month\n");
+    scanf("%d", &s1.d.month);
+    printf("Enter Year\n");
+    scanf("%d", &s1.d.year);
+    printf("Enter students English marks\n");
+    scanf("%d", &s1.m.eng); //Accessing the data members of structure marks through the object of stucture student...
+    printf("Enter students Maths marks\n");
+    scanf("%d", &s1.m.math);
+    printf("Enter students Science marks\n");
+    scanf("%d", &s1.m.science);
+
+    printf("Following are the details of the student\n");
+    printf("Roll No. First Name  Middle Name  Last Name  Gender\tDOB\tEnglish  Maths  Science\n"); //Display formated output as a list using format specifier
+    printf("%d\t\t%s\t  %s\t \t%s\t  %s\t%d %d %d\t\t %d\t %d\t %d", s1.r_no, s1.n.f_name, s1.n.m_name, s1.n.l_name, s1.gender, s1.d.day, s1.d.month, s1.d.year, s1.m.eng, s1.m.math, s1.m.science);
+    getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+Enter details of the student
+Enter Roll No. of the student
+1
+Enter first name of the student
+shubham
+Enter middle name of the student
+A.
+Enter last name of the student
+mishra
+Enter Gender of the student
+male
+Please enter birth details of the student
+Enter Day
+18
+Enter Month
+05
+Enter Year
+2001
+Enter students English marks
+85
+Enter students Maths marks
+95
+Enter students Science marks
+96
+
+Following are the details of the student
+Roll No. First Name  Middle Name  Last Name  Gender     DOB     English  Maths  Science
+1        shubham        A.          mishra    male   18 5 2001     85     95      96

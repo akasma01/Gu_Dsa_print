@@ -1,0 +1,77 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.8
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q. 8: Write a program to add and subtract height 6'2"
+and 5'4".
+............................................................................................................................................
+............................................................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+
+struct height       //creating a structure height with 2 data members feet and inch.
+{
+    int feet, inch;
+};
+
+struct height sum(struct height h1, struct height h2)   //creating a function of type struct to add heights in new object of struct type and return the same object.
+{
+    struct height sum;  //creating sum oject to store addition of feet and inch separately and return its object. 
+
+    //adding feet and inch of both objects.
+    sum.feet = h1.feet + h2.feet;   
+    sum.inch = h1.inch + h2.inch;
+    if (sum.inch > 12)  //converting values greater than 12 inches into feet by incremeting it by 1.
+    {
+        sum.feet += sum.inch / 12;
+        sum.inch = sum.inch % 12;
+    }
+    return sum; //returning sum object to calling function.
+};
+
+struct height diff(struct height h1, struct height h2)  //creating a function of type struct to subtract heights in new object of struct type and return the same object.
+{
+    struct height diff; //creating diff oject to store substraction of feet and inch separately and return its object. 
+
+     //subtracting feet and inch of both objects.
+    diff.feet = h1.feet - h2.feet;
+    diff.inch = h1.inch - h2.inch;
+
+    if (diff.inch < 0)  //converting inches in negative to positive by adding 12 to it and decrementing feet by 1.
+    {
+        diff.inch += 12;
+        diff.feet -= 1;
+    }
+    return diff;    //returning diff object to calling function.
+};
+
+void main()
+{
+    struct height h1 = {6, 9}, h2 = {2, 10}, result;	//creating 2 height objects namely h1,h2 to add and subtract them and store the return value in return object.
+    result = sum(h1, h2);   //calling sum function by passing heights h1 and h2.
+    printf("The sum of heights is %d feet %d inches\n", result.feet, result.inch);  //display sum of heights.
+    result = diff(h1, h2);  	//calling diff function by passing heights h1 and h2.
+    printf("The difference of heights is %d feet %d inches\n", result.feet, result.inch);   //display sum of heights.
+
+    getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+The sum of heights is 9 feet 7 inches
+The difference of heights is 3 feet 11 inches

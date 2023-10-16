@@ -1,0 +1,63 @@
+                                        ROLLWALA COMPUTER CENTER                                            
+                                                                                                            Date    : 18/10/2023
+Name     : Shubham Mishra
+Roll     : 22
+Subject  : Data Structures & Algorithms
+Course   : MCA - 1 
+Prog No  : Q.10
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+Q.10 :Write a program using structure to check if the
+current year is leap year or not.
+............................................................................................................................................
+............................................................................................................................................
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+
+struct leap    //creating structure to store year.
+{
+   int year;
+};
+
+void main()
+{
+   struct leap y = {2024}; //creating object of struct leap and assigning year to it.
+
+   //using if-else-if to decide if given year is a leap year or not.
+    
+   if (y.year % 400 == 0)
+   {
+      printf("%d is a leap year.", y.year);
+   }
+
+   else if (y.year % 100 == 0)
+   {
+      printf("%d is not a leap year.", y.year);
+   }
+
+   else if (y.year % 4 == 0)
+   {
+      printf("%d is a leap year.", y.year);
+   }
+
+   else
+   {
+      printf("%d is not a leap year.", y.year);
+   }
+
+   getch();
+}
+
+
+// OUTPUT :-
+
+// ------------------------------------------------------------------------------------
+
+2024 is a leap year.
